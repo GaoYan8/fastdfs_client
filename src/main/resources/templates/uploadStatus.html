@@ -12,5 +12,24 @@
     <h2 th:text="${path}"/>
 </div>
 
+
+
+ <table >
+                        <tr>
+                            <td>序号</td>
+                            <td>文件名</td>
+                           
+                        </tr>
+
+                        <#list  listFile  as e>
+                            <tr>
+                                <td>${e.name}</td>
+                                <td>${e.a}</td>
+                             
+                            </tr>
+                        </#list>
+                   
+                    </table>
+
 </body>
 </html>

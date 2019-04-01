@@ -1,6 +1,8 @@
 package com.zarl.gy.zarl_fastdfs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +13,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zarl.gy.zarl_fastdfs.client.FastDFSClient;
 import com.zarl.gy.zarl_fastdfs.constant.ErrorCode;
+import com.zarl.gy.zarl_fastdfs.entity.FileEntity;
 import com.zarl.gy.zarl_fastdfs.entity.response.FileResponseData;
 import com.zarl.gy.zarl_fastdfs.exception.FastDFSException;
 import com.zarl.gy.zarl_fastdfs.utils.FileCheck;
@@ -37,13 +42,6 @@ import com.zarl.gy.zarl_fastdfs.utils.FileCheck;
 public class FileObjectController {
 	
 
-
-	@GetMapping("/html/upload")
-	public String index() {
-		return "upload";
-	}
-	
-
 	@Autowired
     private FastDFSClient fastDFSClient ;
 
@@ -58,13 +56,29 @@ public class FileObjectController {
      */
     @Value("${fastdfs.http_secret_key}")
     private String fastDFSHttpSecretKey;
+    
+    
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public FileResponseData test(){
-        return new FileResponseData();
+	@GetMapping("/html/upload")
+	public String index() {
+		return "upload";
+	}
+	
+
+
+    @RequestMapping(value = "/uploadStatus" ,method= RequestMethod.GET)
+    public String singleFileUpload(HttpServletRequest request) {
+    	List<FileEntity> list = new ArrayList<>();
+    	for(int y = 8;y<15;y++) {
+    		FileEntity e = new FileEntity();
+    		e.setA(y);
+    		e.setName("循环 "+y);
+    		list.add(e); 
+    	}
+    	request.setAttribute("listFile", list);
+    	request.setAttribute("message", "You successfully uploaded ");
+        return "uploadStatus";
     }
-
     /**
      * 上传文件通用，只上传文件到服务器，不会保存记录到数据库
      *
@@ -162,7 +176,8 @@ public class FileObjectController {
      * @param filePath
      */
     @RequestMapping("/delete/file")
-    public FileResponseData deleteFile(String filePath, Locale locale) {
+    @ResponseBody
+    public FileResponseData deleteFile(@RequestParam("filePath") String filePath, Locale locale) {
         FileResponseData responseData = new FileResponseData();
         try {
             fastDFSClient.deleteFile(filePath);
