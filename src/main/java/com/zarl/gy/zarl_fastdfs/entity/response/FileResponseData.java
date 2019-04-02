@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.zarl.gy.zarl_fastdfs.entity.base.MessagesEntity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 
  *   
@@ -15,6 +18,7 @@ import com.zarl.gy.zarl_fastdfs.entity.base.MessagesEntity;
  *     
  * @Copyright: 2019 www.zarltech.com Inc. All rights reserved.
  */
+@ApiModel(description = "上传文件后的数据返回对象，便于前台获取数据")
 public class FileResponseData extends MessagesEntity{
 
     /**
@@ -33,30 +37,35 @@ public class FileResponseData extends MessagesEntity{
 	/**
      * 文件路径
      */
+	@ApiModelProperty(value = "文件路径")
     @JsonInclude(Include.NON_NULL)
     private String filePath;
 
     /**
      * 文件名称
      */
+	@ApiModelProperty(value = "文件名称")
     @JsonInclude(Include.NON_NULL)
     private String fileName;
 
     /**
      * 文件类型
      */
+	@ApiModelProperty(value = "文件类型")
     @JsonInclude(Include.NON_NULL)
     private String fileType;
 
     /**
      * Http URL
      */
+	@ApiModelProperty(value = "Http URL")
     @JsonInclude(Include.NON_NULL)
     private String httpUrl;
 
     /**
      * Http Token
      */
+	@ApiModelProperty(value = "Http Token")
     @JsonInclude(Include.NON_NULL)
     private String token;
    

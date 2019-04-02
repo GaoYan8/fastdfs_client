@@ -2,6 +2,8 @@ package com.zarl.gy.zarl_fastdfs.entity.base;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
+
 /**
  * 
  *   
@@ -13,6 +15,7 @@ import java.io.Serializable;
  *     
  * @Copyright: 2019 www.zarltech.com Inc. All rights reserved.
  */
+@ApiModel(description = "基类")
 public class BaseEntity  implements Serializable{
 
 }
