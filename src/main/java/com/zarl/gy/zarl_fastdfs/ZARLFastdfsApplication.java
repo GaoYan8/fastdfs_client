@@ -1,14 +1,10 @@
 package com.zarl.gy.zarl_fastdfs;
 
+
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /**
  * 
@@ -21,7 +17,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
  *     
  * @Copyright: 2019 www.zarltech.com Inc. All rights reserved.
  */
-@EnableAutoConfiguration(exclude = {MultipartAutoConfiguration.class})
 @SpringBootApplication
 @PropertySources({ 
 	@PropertySource("classpath:zarlFastdfs.properties"),
@@ -33,15 +28,12 @@ public class ZARLFastdfsApplication {
 		SpringApplication.run(ZARLFastdfsApplication.class, args);
 	}
 	
-
-	@Bean(name = "multipartResolver")  	
-    public MultipartResolver  multipartResolver() { 	  	
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();  
-        resolver.setDefaultEncoding("UTF-8");  
-        resolver.setResolveLazily(true);//D属性启用是为了推迟文件解析，以在在UploadAction中捕获文件大小异常  
-        resolver.setMaxInMemorySize(40960);  
-        resolver.setMaxUploadSize(1000 * 1024 * 1024);//上传文件大小 20M 20*1024*1024  
-        return resolver; 
-    }
+	/*@Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory config = new MultipartConfigFactory();
+        config.setMaxFileSize("9000MB");
+        config.setMaxRequestSize("9000MB");
+        return config.createMultipartConfig();
+    }*/
 
 }

@@ -5,8 +5,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -46,9 +44,9 @@ import io.swagger.annotations.ApiParam;
 public class FileObjectController {
 	
 	/**
-     * 获取日志记录器
+	 * 获取日志记录器
      */
-    private static Logger logger = LoggerFactory.getLogger(FileObjectController.class);
+    //private static Logger logger = LoggerFactory.getLogger(FileObjectController.class);
 
 	@Autowired
 	private FastDFSClient fastDFSClient;
@@ -85,6 +83,7 @@ public class FileObjectController {
 	public FileResponseData uploadFile(
 			@ApiParam(value = "文件路径") @RequestParam(value = "file", defaultValue = "", required = true) MultipartFile file,
 			HttpServletRequest request) {
+		//logger.info("start  ....");
 		return uploadSample(file, request);
 	}
 

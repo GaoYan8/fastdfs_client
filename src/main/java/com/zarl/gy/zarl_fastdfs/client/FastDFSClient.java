@@ -62,7 +62,7 @@ public class FastDFSClient {
     /**
      * 文件最大的大小
      */
-    private int maxFileSize = 100 * 1000 * 1000;
+    //private int maxFileSize = 100 * 1000 * 1000;
 
     public FastDFSClient() {
         initExt();
@@ -251,13 +251,13 @@ public class FastDFSClient {
             throw new FastDFSException(ErrorCode.FILE_ISNULL.CODE, ErrorCode.FILE_ISNULL.MESSAGE);
         }
 
-        try {
+        /*try {
             if(is.available() > maxFileSize){
                 throw new FastDFSException(ErrorCode.FILE_OUT_SIZE.CODE, ErrorCode.FILE_OUT_SIZE.MESSAGE);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         filename = toLocal(filename);
         // 返回路径
@@ -670,17 +670,17 @@ public class FastDFSClient {
     /**
      * @return the max file size
      */
-    public int getMaxFileSize() {
+   /* public int getMaxFileSize() {
         return maxFileSize;
-    }
+    }*/
 
     /**
      * Set max file size, default 100M
      * @param maxFileSize the max file size
      */
-    public void setMaxFileSize(int maxFileSize) {
+    /*public void setMaxFileSize(int maxFileSize) {
         this.maxFileSize = maxFileSize;
-    }
+    }*/
 
     /**
      * 测试
